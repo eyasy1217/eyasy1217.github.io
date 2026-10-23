@@ -1,30 +1,7 @@
-"// GA4 Configuration and Custom Events
+// GA4 Custom Events
 // ================================
-
-// GA4 Measurement ID（各自のIDに変更してください）
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-
-// GA4初期化
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', GA_MEASUREMENT_ID, {
-  'custom_map': {
-    'custom_parameter_1': 'content_type',
-    'custom_parameter_2': 'content_id',
-    'custom_parameter_3': 'copy_length',
-    'custom_parameter_4': 'content_section',
-    'custom_parameter_5': 'scroll_depth'
-  }
-});
-
-// GA4スクリプトを動的に読み込み
-(function() {
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-})();
+// Note: GA4 base tag (G-BNMKD3NF78) is loaded in HTML <head>
+// This file provides custom event tracking only
 
 // ================================
 // カスタムイベント関数群
@@ -279,4 +256,4 @@ document.addEventListener('DOMContentLoaded', function() {
   trackScrollDepth();
   trackSectionEngagement();
   trackOutboundLinks();
-});""
+});
