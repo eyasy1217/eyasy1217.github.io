@@ -1,0 +1,192 @@
+"<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GA4 Demo - トラッキングテストサイト</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/ga4-config.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>GA4 デモサイト</h1>
+      <p>Google Analytics 4 のイベントトラッキングを試せるテスト環境</p>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 ホーム</a></li>
+      <li><a href="article.html">📝 AI引用テスト記事</a></li>
+      <li><a href="#scroll-test">📊 スクロールテスト</a></li>
+      <li><a href="#conversion">🛒 コンバージョン</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Event Test Section -->
+    <div class="card">
+      <h2>🎯 イベントトラッキングテスト</h2>
+      <p>以下のボタンをクリックして、GA4にイベントが送信されることを確認してください。</p>
+      
+      <div class="event-demo">
+        <h4>CTAボタンテスト</h4>
+        <button class="btn" onclick="trackCTA('primary_cta', 'hero_section')">メインCTAをクリック</button>
+        <button class="btn secondary" onclick="trackCTA('secondary_cta', 'hero_section')">サブCTAをクリック</button>
+        <button class="btn danger" onclick="trackCTA('danger_cta', 'hero_section')">重要ボタンをクリック</button>
+      </div>
+
+      <div class="event-demo">
+        <h4>コンテンツ選択テスト</h4>
+        <button class="btn" onclick="trackSelectContent('video', 'demo_video_001')">動画を選択</button>
+        <button class="btn secondary" onclick="trackSelectContent('article', 'featured_post_001')">記事を選択</button>
+        <button class="btn" onclick="trackSelectContent('product', 'featured_product_001')">商品を選択</button>
+      </div>
+
+      <div class="event-demo">
+        <h4>ファイルダウンロードテスト</h4>
+        <button class="btn" onclick="trackDownload('ga4-guide.pdf', 'pdf')">📄 PDFガイドをダウンロード</button>
+        <button class="btn secondary" onclick="trackDownload('tracking-cheatsheet.xlsx', 'xlsx')">📊 エクセル資料をダウンロード</button>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="card" id="conversion">
+      <h2>📋 リード獲得フォーム（テスト）</h2>
+      <p>フォーム送信イベント（generate_lead）のテスト用です。</p>
+      
+      <form onsubmit="event.preventDefault(); trackFormSubmit('contact_form'); alert('フォーム送信完了！（デモ）');">
+        <div class="form-group">
+          <label for="name">お名前</label>
+          <input type="text" id="name" name="name" placeholder="山田太郎">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest">興味のある内容</label>
+          <select id="interest" name="interest">
+            <option value="">選択してください</option>
+            <option value="ga4_basic">GA4基礎</option>
+            <option value="ga4_advanced">GA4応用</option>
+            <option value="ai_tracking">AI引用トラッキング</option>
+            <option value="ecommerce">EC計測</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">メッセージ</label>
+          <textarea id="message" name="message" rows="4" placeholder="お問い合わせ内容"></textarea>
+        </div>
+        
+        <button type="submit" class="btn">送信する</button>
+      </form>
+    </div>
+
+    <!-- Product Demo Section -->
+    <div class="card">
+      <h2>🛍️ 購入イベントデモ</h2>
+      <p>eコマースのpurchaseイベントをテストします。</p>
+      
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-image">📚</div>
+          <div class="product-info">
+            <h4>GA4 完全ガイドブック</h4>
+            <p>初心者から上級者まで対応</p>
+            <div class="product-price">¥3,980</div>
+            <button class="btn" onclick="trackPurchase(3980, 'JPY', [{item_name: 'GA4 Guide', item_id: 'book_001', price: 3980}])">購入する</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">🎥</div>
+          <div class="product-info">
+            <h4>オンライン講座セット</h4>
+            <p>動画20本 + 教材付き</p>
+            <div class="product-price">¥12,800</div>
+            <button class="btn secondary" onclick="trackPurchase(12800, 'JPY', [{item_name: 'Online Course', item_id: 'course_001', price: 12800}])">購入する</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">🔧</div>
+          <div class="product-info">
+            <h4>コンサルティング（1時間）</h4>
+            <p>個別設定サポート</p>
+            <div class="product-price">¥25,000</div>
+            <button class="btn danger" onclick="trackPurchase(25000, 'JPY', [{item_name: 'Consulting', item_id: 'service_001', price: 25000}])">購入する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- External Links Section -->
+    <div class="card">
+      <h2>🌐 外部リンクテスト</h2>
+      <p>外部サイトへのリンククリック（outbound_click）をテストします。</p>
+      
+      <a href="https://developers.google.com/analytics/devguides/collection/ga4" target="_blank" class="btn">
+        GA4 公式ドキュメント ↗
+      </a>
+      <a href="https://analytics.google.com" target="_blank" class="btn secondary">
+        Google Analytics ↗
+      </a>
+      <a href="https://tagmanager.google.com" target="_blank" class="btn">
+        Google Tag Manager ↗
+      </a>
+    </div>
+
+    <!-- Scroll Test Section -->
+    <div id="scroll-test">
+      <div class="scroll-section" data-track="section" data-section-id="section_1">
+        <div class="scroll-content">
+          <div class="scroll-marker">1</div>
+          <h2>スクロールセクション 1</h2>
+          <p>このセクションが表示されると、<code>section_engagement</code>イベントが送信されます。</p>
+          <p>25%, 50%, 75%, 90% のスクロール深度でもイベントが送信されます。</p>
+        </div>
+      </div>
+      
+      <div class="scroll-section" data-track="section" data-section-id="section_2">
+        <div class="scroll-content">
+          <div class="scroll-marker">2</div>
+          <h2>スクロールセクション 2</h2>
+          <p>各セクションの閲覧時間が測定されます。</p>
+          <p>Intersection Observer APIを使用して、実際に画面に表示されている時間を計測しています。</p>
+        </div>
+      </div>
+      
+      <div class="scroll-section" data-track="section" data-section-id="section_3">
+        <div class="scroll-content">
+          <div class="scroll-marker">3</div>
+          <h2>スクロールセクション 3</h2>
+          <p>GA4では、ユーザーのエンゲージメントを深く理解することができます。</p>
+          <p>このデモサイトでは、copyイベントを使ってAIによる引用を検知する仕組みを実装しています。</p>
+          <a href="article.html" class="btn">📝 AI引用テスト記事へ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>GA4 Demo Site for Beginners | GitHub Pages対応</p>
+      <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+        コンソールを開くと送信イベントの詳細が確認できます
+      </p>
+    </div>
+  </footer>
+
+  <!-- Event Log Panel -->
+  <div id="event-log" class="event-log">
+    <h4>📊 最新のGA4イベント</h4>
+    <div id="event-log-content"></div>
+  </div>
+
+</body>
+</html>""
