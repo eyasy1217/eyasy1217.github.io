@@ -1,201 +1,306 @@
-"<!DOCTYPE html>
+"<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI引用検知テスト記事 | GA4 Demo</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/ga4-config.js"></script>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1>🤖 AI引用検知テスト記事</h1>
-      <p>このページでは、copyイベントを使ってAIによる引用を検知する実装をテストします</p>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI引用検知テスト記事 | GA4 Demo</title>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">🏠 ホーム</a></li>
-      <li><a href="article.html">📝 この記事</a></li>
-    </ul>
-  </nav>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BNMKD3NF78"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-BNMKD3NF78");
+    </script>
 
-  <div class="container">
-    <!-- Article Header -->
-    <div class="card">
-      <h1>生成AI時代のWebコンテンツ戦略：引用トラッキングの重要性</h1>
-      <p style="color: #718096; margin-bottom: 20px;">
-        公開日: 2024年1月15日 | カテゴリ: GA4, AI, アナリティクス
-      </p>
-      
-      <p>この記事では、テキストを選択してコピーすると、<strong>text_copiedイベント</strong>がGA4に送信されます。これにより、ユーザーがどの部分を引用・保存しようとしたかを把握できます。</p>
-    </div>
-
-    <!-- Section 1: Introduction -->
-    <div class="card" data-section="introduction" data-track="section" data-section-id="article_intro">
-      <h2>はじめに：生成AIとコンテンツの新しい関係</h2>
-      
-      <p>ChatGPT、Claude、Geminiなどの生成AIツールが普及した現代では、ユーザーがWebコンテンツを消費する方法が大きく変化しました。従来の「読む」だけでなく、「AIに読ませる」「一部を引用して質問する」などの新しい利用形態が生まれています。</p>
-      
-      <div class="quote-box" data-section="key_quote_1">
-        <p>生成AI時代において、コンテンツの「引用可能性」はSEO以上に重要な指標となる可能性があります。</p>
-        <p class="copy-hint">💡 この引用ボックスのテキストをコピーしてみてください</p>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/ga4-config.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>🤖 AI引用検知テスト記事</h1>
+        <p>
+          このページでは、copyイベントを使ってAIによる引用を検知する実装をテストします
+        </p>
       </div>
+    </header>
 
-      <p>この変化に対応するために、Webサイト運営者は以下の問いに答える必要があります：</p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li>ユーザーはどの部分を最も気に入っているのか？</li>
-        <li>どのセクションが引用される可能性が高いのか？</li>
-        <li>AIに学習される価値のあるコンテンツは何か？</li>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 ホーム</a></li>
+        <li><a href="article.html">📝 この記事</a></li>
       </ul>
-    </div>
+    </nav>
 
-    <!-- Section 2: Analytics Strategy -->
-    <div class="card" data-section="analytics_strategy" data-track="section" data-section-id="article_strategy">
-      <h2>GA4による引用検知：実装アプローチ</h2>
-      
-      <p>Google Analytics 4（GA4）には、従来のページビューやクリック以外にも、<strong>copyイベント</strong>を活用した高度なトラッキングが可能です。この機能を使うことで、コンテンツの価値を定量的に測定できます。</p>
-
-      <h3>実装のポイント</h3>
-      
-      <div class="key-point" data-section="implementation_tip">
-        <p><strong>1. テキスト選択の長さを測定</strong></p>
-        <p>長いテキストをコピーした場合は「引用」、短い場合は「単語の確認」など、意図を推測できます。</p>
-      </div>
-
-      <div class="key-point" data-section="implementation_tip_2" style="margin-top: 15px;">
-        <p><strong>2. セクションの特定</strong></p>
-        <p>どの見出しや段落からコピーされたかをdata属性で記録し、人気のコンテンツ部分を特定します。</p>
-        <p class="copy-hint">💡 この段落をコピーすると、section名が送信されます</p>
-      </div>
-
-      <div class="key-point" data-section="implementation_tip_3" style="margin-top: 15px;">
-        <p><strong>3. 時間情報の記録</strong></p>
-        <p>コピーが発生した時刻を記録することで、特定の時間帯に人気のコンテンツを分析できます。</p>
-      </div>
-    </div>
-
-    <!-- Section 3: Share Section -->
-    <div class="card" data-section="share_section" data-track="section" data-section-id="article_share">
-      <h2>コンテンツの拡散：シェアボタンとコピーの連携</h2>
-      
-      <p>テキストコピーは、多くの場合、のちのシェアや引用につながります。以下のボタンをクリックすると、shareイベントが送信されます：</p>
-      
-      <div style="margin: 20px 0;">
-        <button class="btn" onclick="trackShare('twitter')">🐦 Twitterでシェア</button>
-        <button class="btn secondary" onclick="trackShare('facebook')">📘 Facebookでシェア</button>
-        <button class="btn" onclick="trackShare('linkedin')">💼 LinkedInでシェア</button>
-        <button class="btn secondary" onclick="trackShare('email')">📧 メールで送信</button>
-      </div>
-
-      <div class="quote-box" data-section="shareable_quote">
-        <p>「測定できないものは改善できない」というマーケティングの基本原則は、AI時代のコンテンツ戦略にも当てはまります。</p>
-        <p class="copy-hint">💡 SNSでシェアしたい内容をコピー→シェアボタンをクリック</p>
-      </div>
-    </div>
-
-    <!-- Section 4: Data Interpretation -->
-    <div class="card" data-section="data_analysis" data-track="section" data-section-id="article_analysis">
-      <h2>データの解釈と活用法</h2>
-      
-      <p>収集したcopyイベントデータは、以下のような洞察を提供します：</p>
-
-      <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <thead>
-          <tr style="background: #667eea; color: white;">
-            <th style="padding: 12px; text-align: left;">メトリクス</th>
-            <th style="padding: 12px; text-align: left;">意味</th>
-            <th style="padding: 12px; text-align: left;">活用方法</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px;">copy_length</td>
-            <td style="padding: 12px;">コピーされた文字数</td>
-            <td style="padding: 12px;">引用 vs 部分的コピーの区別</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px;">content_section</td>
-            <td style="padding: 12px;">コピー元のセクション</td>
-            <td style="padding: 12px;">人気コンテンツの特定</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px;">copy_timestamp</td>
-            <td style="padding: 12px;">コピー発生時刻</td>
-            <td style="padding: 12px;">時間帯別の興味分析</td>
-          </tr>
-          <tr>
-            <td style="padding: 12px;">page_path</td>
-            <td style="padding: 12px;">コピーが発生したページ</td>
-            <td style="padding: 12px;">高価値ページの特定</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="key-point" style="margin-top: 20px;" data-section="data_driven_insight">
-        <h3>💡 重要な洞察</h3>
-        <p>コピーイベントの発生率が高い記事は、ユーザーにとって<strong>「参照価値の高いコンテンツ」</strong>である可能性があります。これはSEOの順位とは別の、実用的な価値指標となり得ます。</p>
-        <p class="copy-hint">💡 この段落をコピーして、GA4でどのように記録されるか確認してください</p>
-      </div>
-    </div>
-
-    <!-- Section 5: Future Outlook -->
-    <div class="card" data-section="future_outlook" data-track="section" data-section-id="article_future">
-      <h2>未来の展望：AIとの共存</h2>
-      
-      <p>生成AIの進化は止まらず、Webコンテンツの消費形態はさらに変化していくでしょう。しかし、核心となるのは変わりません：<strong>価値ある情報を提供し、その価値を正しく測定する</strong>ことです。</p>
-
-      <div class="quote-box" data-section="conclusion_quote">
-        <p>AIに学習されるコンテンツは、同時に人間の読者にも価値を提供するコンテンツでもあります。両者の価値基準は驚くほど似通っています。</p>
-      </div>
-
-      <p>このデモサイトで実装されているテキストコピー検知は、一つの出発点に過ぎません。将来的には：</p>
-      
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li>コピー後の行動（シェア、保存、別タブでの検索）の追跡</li>
-        <li>AIツールへのペースト検知（技術的制約あり）</li>
-        <li>引用されたコンテンツのインパクト測定</li>
-      </ul>
-      
-      <p style="margin-top: 15px;">などの発展形が考えられます。</p>
-    </div>
-
-    <!-- CTA Section -->
-    <div class="card">
-      <h2>🎯 この記事を活用する</h2>
-      
-      <p>この記事の内容をコピーして、実際にGA4でどのようにデータが記録されるか確認してください。</p>
-      
-      <div style="margin: 20px 0;">
-        <a href="index.html" class="btn">🏠 イベントテストページへ</a>
-        <button class="btn secondary" onclick="trackDownload('article-sample-text.txt', 'txt')">
-          📄 記事全文をダウンロード（フォーマット済み）
-        </button>
-      </div>
-
-      <div class="success-message" style="margin-top: 20px;">
-        <strong>✅ 確認ポイント</strong><br>
-        ブラウザの開発者ツール（F12）→ Consoleを開くと、GA4に送信されるイベントの詳細がリアルタイムで確認できます。
-      </div>
-    </div>
-  </div>
-
-  <footer>
     <div class="container">
-      <p>GA4 Demo Site - AI引用検知テスト記事</p>
-      <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
-        テキストをコピーすると、自動的にtext_copiedイベントが送信されます
-      </p>
+      <!-- Article Header -->
+      <div class="card">
+        <h1>生成AI時代のWebコンテンツ戦略：引用トラッキングの重要性</h1>
+        <p style="color: #718096; margin-bottom: 20px">
+          公開日: 2024年1月15日 | カテゴリ: GA4, AI, アナリティクス
+        </p>
+
+        <p>
+          この記事では、テキストを選択してコピーすると、<strong>text_copiedイベント</strong>がGA4に送信されます。これにより、ユーザーがどの部分を引用・保存しようとしたかを把握できます。
+        </p>
+      </div>
+
+      <!-- Section 1: Introduction -->
+      <div
+        class="card"
+        data-section="introduction"
+        data-track="section"
+        data-section-id="article_intro"
+      >
+        <h2>はじめに：生成AIとコンテンツの新しい関係</h2>
+
+        <p>
+          ChatGPT、Claude、Geminiなどの生成AIツールが普及した現代では、ユーザーがWebコンテンツを消費する方法が大きく変化しました。従来の「読む」だけでなく、「AIに読ませる」「一部を引用して質問する」などの新しい利用形態が生まれています。
+        </p>
+
+        <div class="quote-box" data-section="key_quote_1">
+          <p>
+            生成AI時代において、コンテンツの「引用可能性」はSEO以上に重要な指標となる可能性があります。
+          </p>
+          <p class="copy-hint">
+            💡 この引用ボックスのテキストをコピーしてみてください
+          </p>
+        </div>
+
+        <p>
+          この変化に対応するために、Webサイト運営者は以下の問いに答える必要があります：
+        </p>
+        <ul style="margin-left: 20px; margin-top: 10px">
+          <li>ユーザーはどの部分を最も気に入っているのか？</li>
+          <li>どのセクションが引用される可能性が高いのか？</li>
+          <li>AIに学習される価値のあるコンテンツは何か？</li>
+        </ul>
+      </div>
+
+      <!-- Section 2: Analytics Strategy -->
+      <div
+        class="card"
+        data-section="analytics_strategy"
+        data-track="section"
+        data-section-id="article_strategy"
+      >
+        <h2>GA4による引用検知：実装アプローチ</h2>
+
+        <p>
+          Google Analytics
+          4（GA4）には、従来のページビューやクリック以外にも、<strong>copyイベント</strong>を活用した高度なトラッキングが可能です。この機能を使うことで、コンテンツの価値を定量的に測定できます。
+        </p>
+
+        <h3>実装のポイント</h3>
+
+        <div class="key-point" data-section="implementation_tip">
+          <p><strong>1. テキスト選択の長さを測定</strong></p>
+          <p>
+            長いテキストをコピーした場合は「引用」、短い場合は「単語の確認」など、意図を推測できます。
+          </p>
+        </div>
+
+        <div
+          class="key-point"
+          data-section="implementation_tip_2"
+          style="margin-top: 15px"
+        >
+          <p><strong>2. セクションの特定</strong></p>
+          <p>
+            どの見出しや段落からコピーされたかをdata属性で記録し、人気のコンテンツ部分を特定します。
+          </p>
+          <p class="copy-hint">
+            💡 この段落をコピーすると、section名が送信されます
+          </p>
+        </div>
+
+        <div
+          class="key-point"
+          data-section="implementation_tip_3"
+          style="margin-top: 15px"
+        >
+          <p><strong>3. 時間情報の記録</strong></p>
+          <p>
+            コピーが発生した時刻を記録することで、特定の時間帯に人気のコンテンツを分析できます。
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 3: Share Section -->
+      <div
+        class="card"
+        data-section="share_section"
+        data-track="section"
+        data-section-id="article_share"
+      >
+        <h2>コンテンツの拡散：シェアボタンとコピーの連携</h2>
+
+        <p>
+          テキストコピーは、多くの場合、のちのシェアや引用につながります。以下のボタンをクリックすると、shareイベントが送信されます：
+        </p>
+
+        <div style="margin: 20px 0">
+          <button class="btn" onclick="trackShare('twitter')">
+            🐦 Twitterでシェア
+          </button>
+          <button class="btn secondary" onclick="trackShare('facebook')">
+            📘 Facebookでシェア
+          </button>
+          <button class="btn" onclick="trackShare('linkedin')">
+            💼 LinkedInでシェア
+          </button>
+          <button class="btn secondary" onclick="trackShare('email')">
+            📧 メールで送信
+          </button>
+        </div>
+
+        <div class="quote-box" data-section="shareable_quote">
+          <p>
+            「測定できないものは改善できない」というマーケティングの基本原則は、AI時代のコンテンツ戦略にも当てはまります。
+          </p>
+          <p class="copy-hint">
+            💡 SNSでシェアしたい内容をコピー→シェアボタンをクリック
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 4: Data Interpretation -->
+      <div
+        class="card"
+        data-section="data_analysis"
+        data-track="section"
+        data-section-id="article_analysis"
+      >
+        <h2>データの解釈と活用法</h2>
+
+        <p>収集したcopyイベントデータは、以下のような洞察を提供します：</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+          <thead>
+            <tr style="background: #667eea; color: white">
+              <th style="padding: 12px; text-align: left">メトリクス</th>
+              <th style="padding: 12px; text-align: left">意味</th>
+              <th style="padding: 12px; text-align: left">活用方法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #e2e8f0">
+              <td style="padding: 12px">copy_length</td>
+              <td style="padding: 12px">コピーされた文字数</td>
+              <td style="padding: 12px">引用 vs 部分的コピーの区別</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0">
+              <td style="padding: 12px">content_section</td>
+              <td style="padding: 12px">コピー元のセクション</td>
+              <td style="padding: 12px">人気コンテンツの特定</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0">
+              <td style="padding: 12px">copy_timestamp</td>
+              <td style="padding: 12px">コピー発生時刻</td>
+              <td style="padding: 12px">時間帯別の興味分析</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px">page_path</td>
+              <td style="padding: 12px">コピーが発生したページ</td>
+              <td style="padding: 12px">高価値ページの特定</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div
+          class="key-point"
+          style="margin-top: 20px"
+          data-section="data_driven_insight"
+        >
+          <h3>💡 重要な洞察</h3>
+          <p>
+            コピーイベントの発生率が高い記事は、ユーザーにとって<strong>「参照価値の高いコンテンツ」</strong>である可能性があります。これはSEOの順位とは別の、実用的な価値指標となり得ます。
+          </p>
+          <p class="copy-hint">
+            💡 この段落をコピーして、GA4でどのように記録されるか確認してください
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 5: Future Outlook -->
+      <div
+        class="card"
+        data-section="future_outlook"
+        data-track="section"
+        data-section-id="article_future"
+      >
+        <h2>未来の展望：AIとの共存</h2>
+
+        <p>
+          生成AIの進化は止まらず、Webコンテンツの消費形態はさらに変化していくでしょう。しかし、核心となるのは変わりません：<strong>価値ある情報を提供し、その価値を正しく測定する</strong>ことです。
+        </p>
+
+        <div class="quote-box" data-section="conclusion_quote">
+          <p>
+            AIに学習されるコンテンツは、同時に人間の読者にも価値を提供するコンテンツでもあります。両者の価値基準は驚くほど似通っています。
+          </p>
+        </div>
+
+        <p>
+          このデモサイトで実装されているテキストコピー検知は、一つの出発点に過ぎません。将来的には：
+        </p>
+
+        <ul style="margin-left: 20px; margin-top: 10px">
+          <li>コピー後の行動（シェア、保存、別タブでの検索）の追跡</li>
+          <li>AIツールへのペースト検知（技術的制約あり）</li>
+          <li>引用されたコンテンツのインパクト測定</li>
+        </ul>
+
+        <p style="margin-top: 15px">などの発展形が考えられます。</p>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="card">
+        <h2>🎯 この記事を活用する</h2>
+
+        <p>
+          この記事の内容をコピーして、実際にGA4でどのようにデータが記録されるか確認してください。
+        </p>
+
+        <div style="margin: 20px 0">
+          <a href="index.html" class="btn">🏠 イベントテストページへ</a>
+          <button
+            class="btn secondary"
+            onclick="trackDownload('article-sample-text.txt', 'txt')"
+          >
+            📄 記事全文をダウンロード（フォーマット済み）
+          </button>
+        </div>
+
+        <div class="success-message" style="margin-top: 20px">
+          <strong>✅ 確認ポイント</strong><br />
+          ブラウザの開発者ツール（F12）→
+          Consoleを開くと、GA4に送信されるイベントの詳細がリアルタイムで確認できます。
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <!-- Event Log Panel -->
-  <div id="event-log" class="event-log">
-    <h4>📊 最新のGA4イベント</h4>
-    <div id="event-log-content"></div>
-  </div>
+    <footer>
+      <div class="container">
+        <p>GA4 Demo Site - AI引用検知テスト記事</p>
+        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8">
+          テキストをコピーすると、自動的にtext_copiedイベントが送信されます
+        </p>
+      </div>
+    </footer>
 
-</body>
-</html>""
+    <!-- Event Log Panel -->
+    <div id="event-log" class="event-log">
+      <h4>📊 最新のGA4イベント</h4>
+      <div id="event-log-content"></div>
+    </div>
+  </body>
+</html>
+""
